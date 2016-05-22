@@ -1,8 +1,18 @@
 package com.bdjobs.recyclerviewswipe;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
+
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+
+import android.transition.Scene;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +27,18 @@ import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 
 import java.util.ArrayList;
 
+
 public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecyclerViewAdapter.SimpleViewHolder> {
 
 
     private Context mContext;
     private ArrayList<Student> studentList;
+    Activity activity;
 
     public SwipeRecyclerViewAdapter(Context context, ArrayList<Student> objects) {
         this.mContext = context;
         this.studentList = objects;
+        this.activity= (Activity) mContext;
     }
 
     @Override
@@ -84,24 +97,24 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             }
         });
 
-        /*viewHolder.swipeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-                if ((((SwipeLayout) v).getOpenStatus() == SwipeLayout.Status.Close)) {
-                    //Start your activity
-
-                    Toast.makeText(mContext, " onClick : " + item.getName() + " \n" + item.getEmailId(), Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });*/
 
         viewHolder.swipeLayout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, " onClick : " + item.getName() + " \n" + item.getEmailId(), Toast.LENGTH_SHORT).show();
+                //TransitionManager.go(Scene.getSceneForLayout(viewHolder.cardView,R.layout.activity_main2,mContext));
+               Intent intent = new Intent(mContext,Main2Activity.class);
+
+                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity,viewHolder.tvName,viewHolder.tvName.getTransitionName()).toBundle();
+
+
+
+                //Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();
+
+                mContext.startActivity(intent,bundle);
+
+                //Toast.makeText(mContext, " onClick : " + item.getName() + " \n" + item.getEmailId(), Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -148,6 +161,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
         // mItemManger is member in RecyclerSwipeAdapter Class
         mItemManger.bindView(viewHolder.itemView, position);
         setAnimation(viewHolder.cardView, position);
+        //CreateAnimationView.createAnimation(viewHolder.cardView);
 
     }
 
@@ -197,4 +211,5 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
 
 
     }
+
 }

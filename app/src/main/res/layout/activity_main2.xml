@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context="com.bdjobs.recyclerviewswipe.Main2Activity">
+    <ImageView
+        android:src="@drawable/images"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
+    <TextView
+        android:transitionName="@string/transition"
+        android:layout_margin="16dp"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:text="MOVIE"
+        android:textColor="#dc0707"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif"
+        android:textSize="16sp"
+        android:text="Watch all of this week's new film trailers, including Bad Moms, Now You See Me 2, The Shallows, Teenage Mutant Ninja Turtles: Out of the Shadows, and more. Plus, get a quick update on the latest movie news and release date announcements. Our editors pick out the most promising films headed to theaters in May, including new X-Men and Captain America installments as well as intriguing indies from Whit Stillman. "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
