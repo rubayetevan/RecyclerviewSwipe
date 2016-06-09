@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
@@ -23,6 +24,14 @@
             <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Job List"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -67,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="24dp"
-                android:layout_weight="32"
+                android:layout_weight="50"
                 android:text="Total Jobs found"
                 android:textColor="#757575"
                 android:textSize="14sp" />
@@ -77,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="24dp"
-                android:layout_weight="68"
+                android:layout_weight="50"
                 android:gravity="right"
                 android:text="61287"
                 android:textColor="#757575" />
@@ -89,22 +98,68 @@
             android:layout_height="0.5dp"
             android:background="#e0e0e0" />
 
-        <android.support.v7.widget.RecyclerView
 
-            android:id="@+id/my_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="5dp"
-            android:scrollbars="vertical" />
+            <android.support.v7.widget.RecyclerView
 
-        <TextView
-            android:id="@+id/empty_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="No Records"
-            android:visibility="gone" />
+                android:id="@+id/my_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:scrollbars="vertical" />
+
+            <TextView
+                android:id="@+id/empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="No Records"
+                android:visibility="gone" />
     </LinearLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:id="@+id/frame_layout"
+        android:background="#FFFFFF"
+        android:layout_height="match_parent">
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu_labels_right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       android:layout_gravity="bottom|right"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true"
+        fab:menu_backgroundColor="#ccffffff"
+        fab:menu_labels_position="right">
+
+
+    <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star"
+            app:fab_size="mini"
+            app:fab_label="Menu item 1" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star"
+            app:fab_size="mini"
+            app:fab_label="Menu item 2" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star"
+            app:fab_size="mini"
+            app:fab_label="Menu item 3" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+    </FrameLayout>
+
+</FrameLayout>

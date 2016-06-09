@@ -4,19 +4,18 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.daimajia.swipe.util.Attributes;
+import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.ArrayList;
 
@@ -84,20 +83,41 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setAdapter(mAdapter);
 
-        /* Scroll Listeners */
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+        final FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frame_layout);
+        frameLayout.getBackground().setAlpha(0);
+        final FloatingActionMenu fabMenu = (FloatingActionMenu) findViewById(R.id.menu_labels_right);
+
+        assert fabMenu != null;
+        fabMenu.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                Log.e("RecyclerView", "onScrollStateChanged");
+            public void onMenuToggle(boolean opened) {
+               if(opened==true)
+               {
+                   frameLayout.getBackground().setAlpha(230);
+                   frameLayout.setOnTouchListener(new View.OnTouchListener() {
+                       @Override
+                       public boolean onTouch(View v, MotionEvent event) {
+                           fabMenu.close(true);
+                           return true;
+                       }
+                   });
+
+               }
+                else if(opened==false)
+               {
+                   frameLayout.getBackground().setAlpha(0);
+                   frameLayout.setOnTouchListener(null);
+               }
+
             }
 
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
         });
+
+
+
     }
+
 
     class CustomScrollListener extends RecyclerView.OnScrollListener {
         CustomScrollListener(){
@@ -137,16 +157,16 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("No Horizontal Scrolled");
             }
 
-            if(dy>0)
+            if(dy>30)
             {
                 Animation out = AnimationUtils.makeOutAnimation(MainActivity.this, true);
                 linearLayout.startAnimation(out);
                 linearLayout.setVisibility(View.GONE);
-                System.out.println("Scrolled Downwards");
+                //System.out.println("Scrolled Downwards ");
             }
-            else if(dy < 0)
+            else if(dy < -30)
             {
-                System.out.println("Scrolled Upwards");
+                System.out.println("Scrolled Upwards= " +dy);
                 Animation in = AnimationUtils.loadAnimation(MainActivity.this, android.R.anim.slide_in_left);
                 linearLayout.startAnimation(in);
                 linearLayout.setVisibility(View.VISIBLE);
